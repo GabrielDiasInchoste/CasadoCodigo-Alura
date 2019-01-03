@@ -24,22 +24,15 @@ public class Usuario implements UserDetails, Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-	private String nome;
+	@Id
 	private String email;
+	
+	private String nome;
 	private String senha;
 	private String confirmarSenha;
-
-	
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "Usuario_Role",
@@ -47,6 +40,14 @@ public class Usuario implements UserDetails, Serializable {
 		inverseJoinColumns = @JoinColumn(name = "role_nome"))
 	private List<Role> roles = new ArrayList<>();
 
+	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -147,7 +148,6 @@ public class Usuario implements UserDetails, Serializable {
 	 public List<Usuario> listarEmails(){
 			 UsuarioDAO dao = new UsuarioDAO();
 			 List<Usuario> emails = dao.listar();
-			 System.out.println("CARAIO METODO DA HORA");
 			 return emails;	  
 		
 	}

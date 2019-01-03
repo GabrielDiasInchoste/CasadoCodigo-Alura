@@ -27,10 +27,6 @@ public class UsuarioValidation implements Validator{
 		if(usuario.getSenha().length()<5 ){
 			errors.rejectValue("senha", "erro.senha.pequena");
 		}
-		
-//		if(!usuario.getEmail().equals(email.listarEmails()) ){
-//			errors.reject("email", "erro.email.existente");
-//		}
 	}
 	
 }

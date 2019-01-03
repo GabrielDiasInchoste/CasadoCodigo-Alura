@@ -45,14 +45,21 @@ public class UsuarioController {
 	
 	@RequestMapping(value="/form",method=RequestMethod.POST)
 	public ModelAndView gravar(@Valid Usuario usuario, BindingResult result){
+
+		List<Usuario> user = usuarioDao.listar();
+		
+		for (Usuario usuario2 : user) {
+			if(usuario.getEmail().equals(usuario2.getEmail())) {
+				result.rejectValue("email", "erro.email.existente");
+			}
+		}
 		
 		if(result.hasErrors()) {
 			return form(usuario);
 		}
-		System.out.println(usuario.getSenha()+ "AIUJHIUHSAIUHSADIUH");
+		
 		String senhaCriptografada = new BCryptPasswordEncoder().encode(usuario.getSenha());
 		usuario.setSenha(senhaCriptografada);
-		System.out.println(usuario.getSenha() + " adsaiudihusaiud");
 		usuarioDao.gravar(usuario);		
 		return new ModelAndView("redirect:/usuario");
 	}
