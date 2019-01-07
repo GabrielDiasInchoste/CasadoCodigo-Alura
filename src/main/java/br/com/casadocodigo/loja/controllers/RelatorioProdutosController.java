@@ -9,8 +9,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.casadocodigo.loja.dao.ProdutoDAO;
@@ -27,9 +27,10 @@ public class RelatorioProdutosController {
 	RelatorioProdutos relatorioProdutos = new RelatorioProdutos();
 
 	@DateTimeFormat
-	@RequestMapping("/relatorio-produtos/{data}")
+	@RequestMapping("/relatorio-produtos")
 	@ResponseBody
-	public RelatorioProdutos detalheJsoon(@PathVariable("data") String data) throws ParseException{
+	public RelatorioProdutos detalheJsoon(@RequestParam(value="data", required=false) String data) throws ParseException{
+
 		GregorianCalendar calendar = new GregorianCalendar();
 		SimpleDateFormat  formatter= new SimpleDateFormat("yyyy-MM-dd");
 		
