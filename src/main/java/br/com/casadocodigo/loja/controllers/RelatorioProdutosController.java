@@ -34,6 +34,13 @@ public class RelatorioProdutosController {
 		GregorianCalendar calendar = new GregorianCalendar();
 		SimpleDateFormat  formatter= new SimpleDateFormat("yyyy-MM-dd");
 		
+		if(data==null || data.isEmpty()) {
+		    relatorioProdutos.setQuantidade(null);
+		    relatorioProdutos.setProdutos(null);
+		    relatorioProdutos.setData(null);
+			return relatorioProdutos;
+		}
+			
 		Date date =  formatter.parse(data);
 		calendar.setTime(date);
 		
